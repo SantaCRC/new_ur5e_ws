@@ -22,10 +22,10 @@ moveit_simple_controller_manager:
     default: true
   qbhand2m1:
     type: FollowJointTrajectory
-    action_ns: follow_joint_trajectory
+    action_ns: qbhand2m1_synergies_trajectory_controller/follow_joint_trajectory
     default: true
     joints:
-      - qbhand2m1_synergy_joint
       - qbhand2m1_manipulation_joint
-    action_ns: follow_joint_trajectory
+      - qbhand2m1_synergy_joint
+    action_ns: qbhand2m1_synergies_trajectory_controller/follow_joint_trajectory
     default: true

@@ -24,15 +24,17 @@ scaled_joint_trajectory_controller:
       - ur5e_wrist_2_joint
       - ur5e_wrist_3_joint
     command_interfaces:
-      []
+      - position
     state_interfaces:
-      []
+      - position
+      - velocity
 qbhand2m1:
   ros__parameters:
     joints:
       - qbhand2m1_manipulation_joint
       - qbhand2m1_synergy_joint
     command_interfaces:
-      []
+      - position
     state_interfaces:
-      []
+      - position
+      - velocity

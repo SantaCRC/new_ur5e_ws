@@ -10,16 +10,12 @@ from moveit_configs_utils.launches import generate_demo_launch
 
 def generate_launch_description():
     # Paths
-    moveit_config_pkg = get_package_share_directory('my_ur5e_moveit')
+    moveit_config_pkg = get_package_share_directory('my_ur5e_moveit2')
     ur5e_description_pkg = get_package_share_directory('my_ur5e_control')
     qbhand_description_pkg = get_package_share_directory('qb_hand_description')
 
     # Generate MoveIt config using MoveItConfigsBuilder
-    moveit_config = MoveItConfigsBuilder("my_robot_cell", package_name="my_ur5e_moveit").to_moveit_configs()
-    
-    # Include 3D sensor configuration yaml file
-    
-
+    moveit_config = MoveItConfigsBuilder("my_robot_cell", package_name="my_ur5e_moveit2").to_moveit_configs()
     
     # Include MoveIt launch file
     moveit_launch = generate_demo_launch(moveit_config)
@@ -46,7 +42,7 @@ def generate_launch_description():
 
     # Launch python script to merge joint states
     joint_state_merger_node = Node(
-        package='my_ur5e_moveit',  # Asegúrate de que el paquete y el archivo merge.py están correctamente configurados
+        package='my_ur5e_moveit2',  # Asegúrate de que el paquete y el archivo merge.py están correctamente configurados
         executable='merge.py',
         name='joint_state_merger',
         output='screen'
