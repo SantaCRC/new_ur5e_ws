@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <!-- Incluyendo la descripción de la mano qbhand -->
+  <xacro:include filename="$(find qb_hand_description)/urdf/qbhand2m.urdf.xacro" />
+
+
+  <xacro:macro name="my_robot_cell" params="
+    parent
+    *origin
+    ur_type
+    joint_limits_parameters_file
+    kinematics_parameters_file
+    physical_parameters_file
+    visual_parameters_file
+    ">
+    <!--This will create the specific robot-->
+    <xacro:ur_robot
+      name="${ur_type}"
+      tf_prefix="${ur_type}_"
+      parent="world"
+      joint_limits_parameters_file="${joint_limits_parameters_file}"
+      kinematics_parameters_file="${kinematics_parameters_file}"
+      physical_parameters_file="${physical_parameters_file}"
+      visual_parameters_file="${visual_parameters_file}"
+    >
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:ur_robot>
+
+    <!-- Conexión de la mano al UR5e -->
+  <joint name="wrist_3_joint_to_hand" type="fixed">
+    <parent link="ur5e_tool0"/> <!-- El último enlace del UR5e -->
+    <child link="root_link"/>      <!-- El enlace base de la mano qbhand -->
+    <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Ajusta las coordenadas si es necesario -->
+  </joint>
+  </xacro:macro>
+
+</robot>

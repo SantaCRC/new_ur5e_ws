@@ -1,0 +1,18 @@
+<package format="3">
+  <name>my_ur5e_description</name>
+  <version>0.0.1</version>
+  <description>UR5e with Soft Hand integration</description>
+
+  <maintainer email="tu_email@dominio.com">Tu Nombre</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>xacro</depend>
+  <depend>ur_description</depend>
+  <depend>qb_hand_description</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

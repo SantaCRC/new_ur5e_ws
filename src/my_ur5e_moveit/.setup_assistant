@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: my_ur5e_description
+    relative_path: urdf/ur5e_soft_hand.urdf.xacro
+  srdf:
+    relative_path: config/my_robot_cell.srdf
+  package_settings:
+    author_name: Fabian Alvarez
+    author_email: fabian.alvarez@ieee.org
+    generated_timestamp: 1729006234

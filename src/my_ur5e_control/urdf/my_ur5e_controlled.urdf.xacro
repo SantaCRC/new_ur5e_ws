@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="my_robot_cell" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Incluyendo la macro de la descripción personalizada -->
+  <xacro:include filename="$(find my_ur5e_description)/urdf/ur5e_soft_hand_macro.urdf.xacro"/>
+
+  <!-- Definir argumentos para parametrizar la descripción -->
+  <xacro:arg name="ur_type" default="ur5e"/>
+  <xacro:arg name="joint_limit_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+
+  <xacro:arg name="robot_ip" default="0.0.0.0"/>
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="fake_sensor_commands" default="false" />
+
+  <!-- Incluir el enlace al mundo -->
+  <link name="world" />
+
+  <!-- Descripción de la escena incluyendo el robot -->
+  <xacro:my_robot_cell
+    parent="world"
+    ur_type="$(arg ur_type)"
+    joint_limits_parameters_file="$(arg joint_limit_parameters_file)"
+    kinematics_parameters_file="$(arg kinematics_parameters_file)"
+    physical_parameters_file="$(arg physical_parameters_file)"
+    visual_parameters_file="$(arg visual_parameters_file)">
+    <origin xyz="0 0 1" rpy="0 0 0" />
+  </xacro:my_robot_cell>
+
+  <!-- Crear la configuración de control ros2_control para el UR -->
+  <ros2_control name="ur5e_robot" type="system">
+    <hardware>
+      <plugin>ur_robot_driver/URPositionHardwareInterface</plugin>
+      <param name="robot_ip">$(arg robot_ip)</param>
+      <param name="headless_mode">$(arg headless_mode)</param>
+      <param name="use_fake_hardware">$(arg use_fake_hardware)</param>
+      <param name="fake_sensor_commands">$(arg fake_sensor_commands)</param>
+    </hardware>
+
+    <!-- Definir interfaces de control de las articulaciones -->
+    <joint name="shoulder_pan_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="shoulder_lift_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="elbow_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="wrist_1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="wrist_2_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="wrist_3_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+</robot>
